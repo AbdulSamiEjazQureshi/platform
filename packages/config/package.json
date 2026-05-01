@@ -1,0 +1,6 @@
+{
+	"name": "@platform/config",
+	"exports": {
+		"./tailwindcss": "./tailwind/base.css"
+	}
+}
