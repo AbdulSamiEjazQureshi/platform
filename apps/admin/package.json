@@ -23,6 +23,7 @@
 	},
 	"dependencies": {
 		"@platform/ui": "workspace:*",
+		"@tanstack/svelte-query": "^6.1.27",
 		"sveltekit-superforms": "^2.30.1",
 		"valibot": "^1.3.1"
 	}
