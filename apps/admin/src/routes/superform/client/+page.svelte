@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button, Input } from '@platform/ui';
 	import { defaults, setError, superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 	import {
@@ -93,25 +94,27 @@
 	<title>Login | Client</title>
 </svelte:head>
 
-<div class="min-h-screen bg-neutral-950 px-4 py-10 text-neutral-100 sm:px-6 lg:px-8">
+<div class="px-4 py-4 text-foreground sm:px-6 lg:px-8">
 	<div class="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-md items-center justify-center">
 		<div class="w-full space-y-6">
 			<div class="space-y-2 text-center">
-				<p class="text-sm font-medium tracking-[0.25em] text-neutral-400 uppercase">Client Login</p>
+				<p class="text-sm font-medium tracking-[0.25em] text-muted-foreground uppercase">
+					Client Login
+				</p>
 
-				<h1 class="text-3xl font-bold tracking-tight text-white">Welcome back</h1>
+				<h1 class="text-3xl font-bold tracking-tight">Welcome back</h1>
 
-				<p class="text-sm text-neutral-400">Sign in to continue to your dashboard.</p>
+				<p class="text-sm text-muted-foreground">Sign in to continue to your dashboard.</p>
 			</div>
 
 			{#if $message}
 				<div
 					in:slide
 					out:fade
-					class="rounded-2xl border px-4 py-3 text-sm shadow-sm
+					class="rounded-xl border px-4 py-3 text-sm shadow-sm
 						{$message.status >= 400
-						? 'border-red-500/30 bg-red-500/10 text-red-200'
-						: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'}"
+						? 'border-destructive/30 bg-destructive/10 text-destructive'
+						: 'border-primary/30 bg-primary/10 text-primary'}"
 				>
 					{$message.message}
 				</div>
@@ -120,12 +123,12 @@
 			<form
 				method="POST"
 				use:enhance
-				class="space-y-5 rounded-3xl border border-white/10 bg-white/3 p-6 shadow-2xl shadow-black/40 backdrop-blur"
+				class="space-y-5 rounded-xl border border-border bg-card p-6 text-card-foreground shadow-sm"
 			>
 				<div class="space-y-2">
-					<label for="email" class="block text-sm font-medium text-neutral-200"> Email </label>
+					<label for="email" class="block text-sm font-medium"> Email </label>
 
-					<input
+					<Input
 						id="email"
 						name="email"
 						type="email"
@@ -133,58 +136,54 @@
 						aria-invalid={$errors.email ? 'true' : undefined}
 						bind:value={$form.email}
 						{...$constraints.email}
-						class="h-11 w-full rounded-xl border border-white/10 bg-neutral-900 px-3 text-sm text-white transition outline-none placeholder:text-neutral-500 focus:border-white/30 focus:ring-4 focus:ring-white/10 aria-[invalid=true]:border-red-400 aria-[invalid=true]:focus:ring-red-500/10"
+						class="h-11"
 					/>
 
 					{#if $errors.email}
-						<p in:slide out:fade class="text-sm text-red-300">
+						<p in:slide out:fade class="text-sm text-destructive">
 							{$errors.email}
 						</p>
 					{/if}
 				</div>
 
 				<div class="space-y-2">
-					<label for="password" class="block text-sm font-medium text-neutral-200">
-						Password
-					</label>
+					<label for="password" class="block text-sm font-medium"> Password </label>
 
-					<input
+					<Input
 						id="password"
 						name="password"
 						type="password"
-						placeholder="••••••••"
+						placeholder="Password"
 						aria-invalid={$errors.password ? 'true' : undefined}
 						bind:value={$form.password}
 						{...$constraints.password}
-						class="h-11 w-full rounded-xl border border-white/10 bg-neutral-900 px-3 text-sm text-white transition outline-none placeholder:text-neutral-500 focus:border-white/30 focus:ring-4 focus:ring-white/10 aria-[invalid=true]:border-red-400 aria-[invalid=true]:focus:ring-red-500/10"
+						class="h-11"
 					/>
 
 					{#if $errors.password}
-						<p in:slide out:fade class="text-sm text-red-300">
+						<p in:slide out:fade class="text-sm text-destructive">
 							{$errors.password}
 						</p>
 					{/if}
 				</div>
 
 				<div class="space-y-2">
-					<label for="databaseInput" class="block text-sm font-medium text-neutral-200">
-						Databases
-					</label>
+					<label for="databaseInput" class="block text-sm font-medium"> Databases </label>
 
-					<input
+					<Input
 						id="databaseInput"
 						name="databaseInput"
-						type="databaseInput"
-						placeholder="••••••••"
+						type="text"
+						placeholder="Add a database"
 						bind:value={database}
 						onkeydown={addDatabase}
-						class="h-11 w-full rounded-xl border border-white/10 bg-neutral-900 px-3 text-sm text-white transition outline-none placeholder:text-neutral-500 focus:border-white/30 focus:ring-4 focus:ring-white/10 aria-[invalid=true]:border-red-400 aria-[invalid=true]:focus:ring-red-500/10"
+						class="h-11"
 					/>
 
-					{addedDatabases}
+					<p class="text-sm text-muted-foreground">{addedDatabases}</p>
 
 					{#if $errors.databases}
-						<p in:slide out:fade class="text-sm text-red-300">
+						<p in:slide out:fade class="text-sm text-destructive">
 							{$errors.databases}
 						</p>
 					{/if}
@@ -193,7 +192,7 @@
 				<div class="flex items-center justify-between gap-4">
 					<label
 						for="remember"
-						class="flex cursor-pointer items-center gap-3 text-sm text-neutral-300"
+						class="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground"
 					>
 						<input
 							id="remember"
@@ -202,7 +201,7 @@
 							aria-invalid={$errors.remember ? 'true' : undefined}
 							bind:checked={$form.remember}
 							{...$constraints.remember}
-							class="size-4 rounded border-white/20 bg-neutral-900 text-white accent-white"
+							class="size-4 rounded border-border bg-input/50 accent-primary focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none"
 						/>
 
 						<span>Remember me</span>
@@ -210,29 +209,29 @@
 				</div>
 
 				{#if $errors.remember}
-					<p in:slide out:fade class="text-sm text-red-300">
+					<p in:slide out:fade class="text-sm text-destructive">
 						{$errors.remember}
 					</p>
 				{/if}
 
-				<button
+				<Button
 					type="button"
 					disabled={$submitting}
 					onclick={submit}
-					class="inline-flex h-11 w-full items-center justify-center rounded-xl bg-white px-4 text-sm font-semibold text-neutral-950 transition hover:bg-neutral-200 disabled:cursor-not-allowed disabled:opacity-60"
+					class="h-11 w-full"
 				>
 					{#if $submitting}
 						<span
-							class="mr-2 size-4 animate-spin rounded-full border-2 border-neutral-950/20 border-t-neutral-950"
+							class="mr-2 size-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground"
 						></span>
 						Signing in...
 					{:else}
 						Submit
 					{/if}
-				</button>
+				</Button>
 			</form>
 
-			<div class="overflow-hidden rounded-2xl border border-white/10 bg-white/3 p-3">
+			<div class="overflow-hidden rounded-xl border border-border bg-card p-3">
 				<SuperDebug data={$form} />
 			</div>
 		</div>
@@ -242,14 +241,14 @@
 		<div
 			in:fade
 			out:fade
-			class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+			class="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
 		>
 			<div
 				in:slide
 				out:fade
-				class="flex items-center gap-3 rounded-2xl border border-white/10 bg-neutral-950 px-5 py-4 text-white shadow-2xl"
+				class="flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-4 text-card-foreground shadow-sm"
 			>
-				<span class="size-5 animate-spin rounded-full border-2 border-white/20 border-t-white"
+				<span class="size-5 animate-spin rounded-full border-2 border-muted border-t-primary"
 				></span>
 				<span class="text-sm font-medium">Loading...</span>
 			</div>

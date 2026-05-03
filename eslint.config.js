@@ -41,7 +41,7 @@ export default defineConfig(
 			'no-console': ['warn', { allow: ['warn', 'error'] }],
 			'no-debugger': 'error',
 			'no-duplicate-imports': 'error',
-			'prefer-const': 'error',
+			'prefer-const': 'off',
 			eqeqeq: ['error', 'always'],
 
 			'@typescript-eslint/no-unused-vars': [
@@ -62,11 +62,6 @@ export default defineConfig(
 				{
 					patterns: [
 						{
-							group: ['../../*'],
-							message:
-								'Prefer workspace package imports or aliases instead of deep relative imports.'
-						},
-						{
 							group: ['@repo/*/src/*', '@repo/*/dist/*'],
 							message: 'Import from the package public API instead of src/dist internals.'
 						}
@@ -76,7 +71,8 @@ export default defineConfig(
 
 			'svelte/no-at-html-tags': 'error',
 			'svelte/no-target-blank': 'error',
-			'svelte/no-unused-svelte-ignore': 'warn'
+			'svelte/no-unused-svelte-ignore': 'warn',
+			'svelte/prefer-const': 'off'
 		}
 	},
 

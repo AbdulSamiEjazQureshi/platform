@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { Button } from '@platform/ui';
 	import { createQuery, useQueryClient } from '@tanstack/svelte-query';
 	import { fade, slide } from 'svelte/transition';
 
@@ -44,12 +45,12 @@
 <section class="space-y-6">
 	<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 		<div>
-			<p class="text-sm font-medium text-zinc-400">TanStack Query</p>
-			<h1 class="text-2xl font-bold tracking-tight text-white">Users</h1>
+			<p class="text-sm font-medium text-muted-foreground">TanStack Query</p>
+			<h1 class="text-2xl font-bold tracking-tight">Users</h1>
 		</div>
 
 		{#if query.data}
-			<p class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-zinc-300">
+			<p class="rounded-lg border border-border bg-muted px-3 py-1 text-sm text-muted-foreground">
 				{query.data.total} total users
 			</p>
 		{/if}
@@ -59,41 +60,40 @@
 		<div
 			in:slide
 			out:fade
-			class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-zinc-300"
+			class="rounded-xl border border-border bg-muted/40 p-6 text-muted-foreground"
 		>
 			<div class="flex items-center gap-3">
-				<div class="size-5 animate-spin rounded-full border-2 border-zinc-600 border-t-white"></div>
+				<div class="size-5 animate-spin rounded-full border-2 border-muted border-t-primary"></div>
 				<p class="font-medium">Loading users...</p>
 			</div>
 		</div>
 	{:else if query.isError}
-		<div class="rounded-2xl border border-red-500/20 bg-red-500/10 p-5 text-red-200">
+		<div class="rounded-xl border border-destructive/30 bg-destructive/10 p-5 text-destructive">
 			<p class="font-semibold">Something went wrong</p>
-			<p class="mt-1 text-sm text-red-200/80">{query.error.message}</p>
+			<p class="mt-1 text-sm">{query.error.message}</p>
 		</div>
 	{:else if query.data}
 		<div class="flex flex-wrap items-center gap-2">
-			<button
+			<Button
 				type="button"
 				onclick={() => query.refetch()}
 				disabled={query.isFetching}
-				class="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-60"
 			>
 				{query.isFetching ? 'Refetching...' : 'Refetch'}
-			</button>
+			</Button>
 
-			<button
+			<Button
 				type="button"
+				variant="outline"
 				onclick={invalidateQuery}
 				disabled={query.isFetching}
-				class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-60"
 			>
 				Invalidate Query
-			</button>
+			</Button>
 		</div>
 
 		{#if query.isFetching}
-			<p in:fade class="text-sm text-zinc-400">Refreshing data...</p>
+			<p in:fade class="text-sm text-muted-foreground">Refreshing data...</p>
 		{/if}
 
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -112,34 +112,34 @@
 	>
 		<article
 			in:fade
-			class="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.06]"
+			class="group rounded-xl border border-border bg-card p-5 text-card-foreground shadow-sm transition hover:-translate-y-0.5 hover:border-primary/30 hover:bg-muted/40"
 		>
 			<div class="flex items-start gap-4">
 				<div
-					class="grid size-12 shrink-0 place-items-center rounded-2xl bg-white text-base font-black text-zinc-950"
+					class="grid size-12 shrink-0 place-items-center rounded-lg bg-primary text-base font-black text-primary-foreground"
 				>
 					{user.firstName.slice(0, 1)}{user.lastName.slice(0, 1)}
 				</div>
 
 				<div class="min-w-0 flex-1">
-					<h2 class="truncate text-base font-semibold text-white">
+					<h2 class="truncate text-base font-semibold">
 						{user.firstName}
 						{user.lastName}
 					</h2>
 
-					<p class="mt-1 truncate text-sm text-zinc-400">
+					<p class="mt-1 truncate text-sm text-muted-foreground">
 						{user.email}
 					</p>
 
 					<div class="mt-4 flex items-center gap-2">
 						<span
-							class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-300"
+							class="rounded-lg border border-border bg-muted px-2.5 py-1 text-xs text-muted-foreground"
 						>
 							ID #{user.id}
 						</span>
 
 						<span
-							class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-300"
+							class="rounded-lg border border-border bg-muted px-2.5 py-1 text-xs text-muted-foreground"
 						>
 							{user.age} years
 						</span>
