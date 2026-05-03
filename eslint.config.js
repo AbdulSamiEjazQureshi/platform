@@ -25,7 +25,14 @@ export default defineConfig(
 		}
 	},
 	{
-		ignores: ['**/.svelte-kit/**', '**/build/**', '**/dist/**', '**/coverage/**', '**/.vercel/**']
+		ignores: [
+			'**/.svelte-kit/**',
+			'**/build/**',
+			'**/dist/**',
+			'**/coverage/**',
+			'**/.vercel/**',
+			'**/storybook-static/**'
+		]
 	},
 
 	{
@@ -94,6 +101,12 @@ export default defineConfig(
 		files: ['**/*.server.ts', '**/+page.server.ts', '**/+layout.server.ts'],
 		rules: {
 			'no-console': 'off'
+		}
+	},
+	{
+		files: ['packages/ui/src/lib/components/button/button.svelte'],
+		rules: {
+			'svelte/no-navigation-without-resolve': 'off'
 		}
 	},
 	{

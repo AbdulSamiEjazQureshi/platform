@@ -1,9 +1,12 @@
 {
 	"name": "platform",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"admin": "pnpm -F admin run dev",
-		"build:admin": "pnpm -F admin run build"
+		"build:admin": "pnpm -F admin run build",
+		"storybook": "pnpm -F @platform/ui run storybook",
+		"build:storybook": "pnpm -F @platform/ui run build-storybook"
 	},
 	"packageManager": "pnpm@10.33.2",
 	"dependencies": {

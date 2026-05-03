@@ -14,7 +14,6 @@
 		string,
 		type InferOutput
 	} from 'valibot';
-	import SuperDebug from 'sveltekit-superforms/SuperDebug.svelte';
 	import { fade, slide } from 'svelte/transition';
 
 	const schema = object({
@@ -230,10 +229,6 @@
 					{/if}
 				</Button>
 			</form>
-
-			<div class="overflow-hidden rounded-xl border border-border bg-card p-3">
-				<SuperDebug data={$form} />
-			</div>
 		</div>
 	</div>
 
